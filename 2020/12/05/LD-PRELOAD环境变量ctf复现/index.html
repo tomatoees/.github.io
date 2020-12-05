@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>LD_PRELOAD环境变量ctf复现 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​                                                      LD_PRELOAAD是一个环境变量，用于动态库的加载，动态库加载的优先级最高 动态库加载顺序 LD_PRELOADLD_LIBRARY_PATH&#x2F;etc&#x2F;ld.so.cache&#x2F;lib&#x2F;usr&#x2F;lib程序的链接链接是指编译器在找到程序中所引用的函数或全局变量所存在的位置。链接可以分为动态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LD_PRELOAD环境变量ctf复现">
+<meta property="og:url" content="http://example.com/2020/12/05/LD-PRELOAD%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8Fctf%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="​                                                      LD_PRELOAAD是一个环境变量，用于动态库的加载，动态库加载的优先级最高 动态库加载顺序 LD_PRELOADLD_LIBRARY_PATH&#x2F;etc&#x2F;ld.so.cache&#x2F;lib&#x2F;usr&#x2F;lib程序的链接链接是指编译器在找到程序中所引用的函数或全局变量所存在的位置。链接可以分为动态">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-05T08:12:17.000Z">
+<meta property="article:modified_time" content="2020-12-05T08:39:18.354Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LD-PRELOAD环境变量ctf复现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/12/05/LD-PRELOAD%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8Fctf%E5%A4%8D%E7%8E%B0/" class="article-date">
+  <time datetime="2020-12-05T08:12:17.000Z" itemprop="datePublished">2020-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LD_PRELOAD环境变量ctf复现
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​                                                      LD_PRELOAAD是一个环境变量，用于动态库的加载，动态库加载的优先级最高<br> 动态库加载顺序<br> LD_PRELOAD<br>LD_LIBRARY_PATH<br>/etc/ld.so.cache<br>/lib<br>/usr/lib<br>程序的链接<br>链接是指编译器在找到程序中所引用的函数或全局变量所存在的位置。<br>链接可以分为动态链接和静态链接<br>静态链接指: 把所有引用到的函数或变量全部编译到可执行文件中。<br>动态链接指: 把所有的函数或变量存放在动态链接库中当程序运行时将函数动态地载入到程序中。’’’</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/12/05/LD-PRELOAD%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8Fctf%E5%A4%8D%E7%8E%B0/" data-id="ckibg4pka0000wku88xrmdy4b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/12/05/myfrstpost/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">myfrstpost</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
